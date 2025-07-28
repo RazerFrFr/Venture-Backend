@@ -1,0 +1,68 @@
+{
+  "contentType": "collection",
+  "contentId": "motd-default-collection",
+  "tcId": "634e8e85-e2fc-4c68-bb10-93604cf6605f",
+  "contentItems": [
+    {
+      "contentType": "content-item",
+      "contentId": "46874c56-0973-4cbe-ac98-b580c5b36df5",
+      "tcId": "61fb3dd8-f23d-45cc-9058-058ab223ba5c",
+      "contentFields": {
+        "body": {
+          "ar": "تم الإنشاء بواسطة Razer.",
+          "en": "Created by Razer.",
+          "de": "Erstellt von Razer.",
+          "es": "Creado por Razer.",
+          "es-419": "Creado por Razer.",
+          "fr": "Créé par Razer.",
+          "it": "Creato da Razer.",
+          "ja": "Razerによって作成されました。",
+          "ko": "Razer가 제작했습니다.",
+          "pl": "Stworzone przez Razer.",
+          "pt-BR": "Criado por Razer.",
+          "ru": "Создано Razer.",
+          "tr": "Razer tarafından oluşturuldu."
+        },
+        "entryType": "Website",
+        "image": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "url": "https://i.imgur.com/ImIwpRm.png"
+          }
+        ],
+        "tabTitleOverride": "Razer Hosting",
+        "tileImage": [
+          {
+            "width": 1024,
+            "height": 512,
+            "url": "https://i.imgur.com/KaJkHgq.png"
+          }
+        ],
+        "title": {
+          "ar": "مرحبًا بك في Razer Hosting!",
+          "en": "Welcome to Razer Hosting!",
+          "de": "Willkommen bei Razer Hosting!",
+          "es": "¡Bienvenidos a Razer Hosting!",
+          "es-419": "¡Bienvenidos a Razer Hosting!",
+          "fr": "Bienvenue sur Razer Hosting !",
+          "it": "Benvenuto in Razer Hosting!",
+          "ja": "Razer Hostingへようこそ！",
+          "ko": "Razer Hosting에 오신 것을 환영합니다!",
+          "pl": "Witaj w Razer Hostingze!",
+          "pt-BR": "Bem-vindo ao Razer Hosting!",
+          "ru": "Добро пожаловать в Razer Hosting!",
+          "tr": "Razer Hosting'a Hoş Geldiniz!"
+        },
+        "videoAutoplay": false,
+        "videoLoop": false,
+        "videoMute": false,
+        "videoStreamingEnabled": false,
+        "websiteButtonText": "Razer Hosting - Github",
+        "websiteURL": "https://github.com/Project-Razer Hosting/Razer Hosting-Backend"
+      },
+      "contentHash": "razerhostingcontenthash",
+      "contentSchemaName": "MotdWebsiteNewsWithVideo"
+    }
+  ]
+}

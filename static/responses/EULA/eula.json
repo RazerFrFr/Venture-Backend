@@ -1,0 +1,15 @@
+{
+  "id": "63efeeb0104afc25dcce6a56",
+  "key": "fn",
+  "version": 1,
+  "revision": 1,
+  "title": "Razer Hosting End User License Agreement",
+  "body": "<h1>Razer Hosting End User License Agreement (EULA)</h1>\n<p><strong>Version:</strong> 1.0<br><strong>Last Updated:</strong> 2025-07-28</p>\n\n<h2>1. Acceptance of Terms</h2>\n<p>By accessing and using Razer Hosting (“Server”), you agree to be bound by this End User License Agreement (“EULA”). If you do not agree to these terms, you may not use the Server.</p>\n\n<h2>2. Grant of License</h2>\n<p>We grant you a limited, non-exclusive, non-transferable, revocable license to access and use the Server for personal, non-commercial purposes.</p>\n\n<h2>3. Prohibited Activities</h2>\n<ul>\n<li>Use cheats, hacks, bots, or any unauthorized third-party software.</li>\n<li>Exploit bugs or glitches to gain unfair advantages.</li>\n<li>Engage in harassment, hate speech, or disruptive behavior.</li>\n<li>Attempt to reverse engineer, modify, or redistribute the server software without permission.</li>\n</ul>\n\n<h2>4. Account & Data</h2>\n<ul>\n<li>Your account and progress on the Server are hosted privately and may be reset or deleted at any time without notice.</li>\n<li>We are not responsible for any data loss or corruption.</li>\n</ul>\n\n<h2>5. Ownership</h2>\n<ul>\n<li>All rights, titles, and interests in the Server (excluding Fortnite® trademarks and content owned by Epic Games) are owned by Razer Hosting.</li>\n<li>Fortnite® and all related assets are trademarks of Epic Games, Inc. This server is not affiliated with, endorsed by, or supported by Epic Games.</li>\n</ul>\n\n<h2>6. Termination</h2>\n<p>We reserve the right to suspend or terminate your access to the Server at any time, with or without reason.</p>\n\n<h2>7. Disclaimer</h2>\n<ul>\n<li>This Server is provided “AS IS” without any warranties.</li>\n<li>We do not guarantee uptime, performance, or compatibility.</li>\n<li>Epic Games is not responsible for any content or services provided by this Server.</li>\n</ul>\n\n<h2>8. Changes to this EULA</h2>\n<p>We may update this EULA at any time. Continued use of the Server after updates constitutes your acceptance of the new terms.</p>",
+  "locale": "en",
+  "createdTimestamp": "2025-07-28T00:00:00.000Z",
+  "lastModifiedTimestamp": "2025-07-28T00:00:00.000Z",
+  "status": "ACTIVE",
+  "custom": true,
+  "url": "",
+  "bodyFormat": "HTML"
+}

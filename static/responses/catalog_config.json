@@ -1,0 +1,59 @@
+{
+  "//": "BR Item Shop Config",
+  "daily1": {
+      "itemGrants": ["AthenaCharacter:CID_412_Athena_Commando_F_Raptor"],
+      "price": 2000
+  },
+  "daily2": {
+      "itemGrants": ["AthenaBackpack:BID_270_StreetDemon"],
+      "price": 500
+  },
+  "daily3": {
+      "itemGrants": ["AthenaItemWrap:Wrap_067_StreetDemon"],
+      "price": 500
+  },
+  "daily4": {
+      "itemGrants": ["AthenaPickaxe:Pickaxe_ID_156_RavenQuillFrozen"],
+      "price": 1200
+  },
+  "daily5": {
+      "itemGrants": ["AhtenaDance:EID_AssassinSalute"],
+      "price": 200
+  },
+  "daily6": {
+      "itemGrants": ["AthenaPickaxe:Pickaxe_ID_213_AssassinSuitSledgehammer"],
+      "price": 500
+  },
+  "daily7": {
+      "itemGrants": ["AthenaCharacter:CID_416_Athena_Commando_M_AssassinSuit"],
+      "price": 0
+  },
+  "daily8": {
+      "itemGrants": ["AthenaDance:EID_Shaka"],
+      "price": 500
+  },
+  "featured1": {
+      "itemGrants": ["AthenaCharacter:CID_333_Athena_Commando_M_Squishy"],
+      "price": 1500
+  },
+  "featured2": {
+      "itemGrants": ["AthenaPickaxe:Pickaxe_ID_154_Squishy"],
+      "price": 500
+  },
+  "featured3": {
+      "itemGrants": ["AthenaCharacter:CID_359_Athena_Commando_F_Aztec"],
+      "price": 1500
+  },
+  "featured4": {
+      "itemGrants": ["AthenaBackpack:BID_229_LuckyRiderMale"],
+      "price": 700
+  },
+  "featured5": {
+      "itemGrants": ["AthenaDance:EID_HeadShake"],
+      "price": 500
+  },
+  "featured6": {
+      "itemGrants": ["AthenaGlider:Glider_ID_140_ShatterFly"],
+      "price": 1200
+  }
+}
