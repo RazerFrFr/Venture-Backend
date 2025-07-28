@@ -63,7 +63,7 @@ func (RegisterCommand) Execute(s *discordgo.Session, i *discordgo.InteractionCre
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	randomEmail := strconv.Itoa(100000+rand.Intn(900000)) + "@razerhosting.xyz"
+	randomEmail := strconv.Itoa(100000+rand.Intn(900000)) + "@VentureBackend.xyz"
 	randomPassword := generateRandomPassword(12)
 
 	success := utils.RegisterUser(&discordId, username, randomEmail, randomPassword, false)

@@ -13,9 +13,12 @@ import (
 var commandList = []registry.Command{
 	user.RegisterCommand{},
 	user.DetailsCommand{},
+	user.MobileLoginCommand{},
 	admin.DeleteUserCommand{},
 	admin.FullLockerCommand{},
 	admin.BanCommand{},
+	admin.UnbanCommand{},
+	admin.HostAccCommand{},
 }
 
 func InitBot() {

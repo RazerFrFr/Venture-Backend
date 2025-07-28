@@ -24,9 +24,9 @@ func RegisterMiscRoutes(r *gin.Engine) {
 		var filePath string
 		switch {
 		case strings.HasSuffix(filename, ".manifest"):
-			filePath = filepath.Join(".", "static", "responses", "CloudDir", "RazerHosting.manifest")
+			filePath = filepath.Join(".", "static", "responses", "CloudDir", "VentureBackend.manifest")
 		case strings.HasSuffix(filename, ".chunk"):
-			filePath = filepath.Join(".", "static", "responses", "CloudDir", "RazerHosting.chunk")
+			filePath = filepath.Join(".", "static", "responses", "CloudDir", "VentureBackend.chunk")
 		case strings.HasSuffix(filename, ".ini"):
 			filePath = filepath.Join(".", "static", "responses", "CloudDir", "Full.ini")
 		default:
@@ -99,22 +99,22 @@ func distributionPointsHandler(c *gin.Context) {
 func launcherAssetsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"appName":       "FortniteContentBuilds",
-		"labelName":     "RazerHosting",
+		"labelName":     "VentureBackend",
 		"buildVersion":  "++Fortnite+Release-9.10-6573057-Android",
 		"catalogItemId": "5cb97847cee34581afdbc445400e2f77",
 		"expires":       "9999-12-31T23:59:59.999Z",
 		"items": gin.H{
 			"MANIFEST": gin.H{
-				"signature":               "RazerHosting",
-				"distribution":            "https://RazerHosting.ol.epicgames.com/",
-				"path":                    "Builds/Fortnite/Content/CloudDir/RazerHosting.manifest",
+				"signature":               "VentureBackend",
+				"distribution":            "https://VentureBackend.ol.epicgames.com/",
+				"path":                    "Builds/Fortnite/Content/CloudDir/VentureBackend.manifest",
 				"hash":                    "55bb954f5596cadbe03693e1c06ca73368d427f3",
 				"additionalDistributions": []string{},
 			},
 			"CHUNKS": gin.H{
-				"signature":               "RazerHosting",
-				"distribution":            "https://RazerHosting.ol.epicgames.com/",
-				"path":                    "Builds/Fortnite/Content/CloudDir/RazerHosting.manifest",
+				"signature":               "VentureBackend",
+				"distribution":            "https://VentureBackend.ol.epicgames.com/",
+				"path":                    "Builds/Fortnite/Content/CloudDir/VentureBackend.manifest",
 				"additionalDistributions": []string{},
 			},
 		},

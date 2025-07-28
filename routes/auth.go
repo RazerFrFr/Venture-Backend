@@ -80,7 +80,7 @@ func handleOAuthToken(c *gin.Context) {
 		}
 
 		var user *models.User
-		if body.Username == "hostaccount@razerhosting.com" {
+		if body.Username == "hostaccount@VentureBackend.xyz" {
 			user, err = utils.FindUserByEmail(body.Username)
 			if err != nil || !utils.VerifyPassword(body.Password, user.Password) {
 				utils.CreateError(c,

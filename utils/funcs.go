@@ -273,9 +273,11 @@ func RegisterUser(discordId *string, username, email, plainPassword string, isSe
 		return false
 	}
 
-	if len(username) >= 25 || len(username) < 3 || len(plainPassword) >= 128 || len(plainPassword) < 4 {
-		Error.Log("RegisterUser: Username or password length invalid")
-		return false
+	if !isServer {
+		if len(username) >= 25 || len(username) < 3 || len(plainPassword) >= 128 || len(plainPassword) < 4 {
+			Error.Log("RegisterUser: Username or password length invalid")
+			return false
+		}
 	}
 
 	allowedChars := " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
@@ -482,6 +484,17 @@ func FindUserByMatchmakingID(matchmakingID string) (*models.User, error) {
 	return &user, nil
 }
 
+func FindUserByUsername(username string) (*models.User, error) {
+	db := os.Getenv("DB_NAME")
+	collection := MongoClient.Database(db).Collection("users")
+	var user models.User
+	err := collection.FindOne(context.TODO(), bson.M{"username": username}).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
+
 func FindProfileByAccountID(accountID string) (*models.Profiles, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -504,6 +517,18 @@ func FindFriendByAccountID(accountID string) (*models.Friends, error) {
 		return nil, err
 	}
 	return &friend, nil
+}
+
+func FindMobileByAccountID(accountID string) (*models.Mobile, error) {
+	dbName := os.Getenv("DB_NAME")
+	collection := MongoClient.Database(dbName).Collection("mobile")
+
+	var mobile models.Mobile
+	err := collection.FindOne(context.TODO(), bson.M{"accountId": accountID}).Decode(&mobile)
+	if err != nil {
+		return nil, err
+	}
+	return &mobile, nil
 }
 
 func LoadJSON(path string) (interface{}, error) {

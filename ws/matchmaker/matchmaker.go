@@ -236,9 +236,16 @@ func InitMatchmaker() {
 		port = "80"
 	}
 
-	router := gin.Default()
+	// Debug Mode
+	//router := gin.Default()
 
-	router.GET("/api/razerhosting/matchmaker/:region/:playlist", func(c *gin.Context) {
+	// Release mode
+	gin.SetMode(gin.ReleaseMode)
+
+	router := gin.New()
+	router.Use(gin.Recovery())
+
+	router.GET("/api/VentureBackend/matchmaker/:region/:playlist", func(c *gin.Context) {
 		apiKey := c.Query("apikey")
 		joinableStr := c.Query("joinable")
 

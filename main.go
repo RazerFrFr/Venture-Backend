@@ -1,6 +1,7 @@
 package main
 
 import (
+	"VentureBackend/api"
 	discord "VentureBackend/bot"
 	"VentureBackend/routes"
 	"VentureBackend/utils"
@@ -31,13 +32,13 @@ func main() {
 	go discord.InitBot()
 
 	// Debug Mode
-	r := gin.Default()
+	//r := gin.Default()
 
-	// Release mode (use later)
-	/*gin.SetMode(gin.ReleaseMode)
+	// Release mode
+	gin.SetMode(gin.ReleaseMode)
 
 	r := gin.New()
-	r.Use(gin.Recovery())*/
+	r.Use(gin.Recovery())
 
 	r.GET("/", func(c *gin.Context) {
 		c.String(200, "Venture Backend made by Razer (originally used (was planned to be) for Razer Hosting).")
@@ -82,4 +83,7 @@ func RegisterRoutesEndpoints(router *gin.Engine) {
 	routes.RegisterTimelineRoutes(router)
 	routes.AddFriendsRoutes(router)
 	routes.AddMatchmakingRoutes(router)
+	api.AddVbucksApiRoute(router)
+	api.AddXPApiRoute(router)
+	api.AddUmbrellaApiRoute(router)
 }

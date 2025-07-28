@@ -23,9 +23,9 @@ func Error(ws *websocket.Conn) {
 }
 
 func RemoveClient(ws *websocket.Conn, joinedMUCs []string) {
-	ClientsMux.Lock()
-	defer ClientsMux.Unlock()
+	var removedClient *Client
 
+	ClientsMux.Lock()
 	clientIndex := -1
 	for i, c := range Clients {
 		if c.Conn == ws {
@@ -33,24 +33,28 @@ func RemoveClient(ws *websocket.Conn, joinedMUCs []string) {
 			break
 		}
 	}
-	if clientIndex == -1 {
+
+	if clientIndex != -1 {
+		removedClient = Clients[clientIndex]
+		Clients = append(Clients[:clientIndex], Clients[clientIndex+1:]...)
+	}
+	ClientsMux.Unlock()
+
+	if removedClient == nil {
 		return
 	}
-	client := Clients[clientIndex]
 
 	var clientStatus struct {
 		Properties map[string]interface{} `json:"Properties"`
 	}
-	json.Unmarshal([]byte(client.LastPresence.Status), &clientStatus)
+	_ = json.Unmarshal([]byte(removedClient.LastPresence.Status), &clientStatus)
 
 	updatePresenceForFriends(ws, "{}", false, true)
-
-	Clients = append(Clients[:clientIndex], Clients[clientIndex+1:]...)
 
 	for _, roomName := range joinedMUCs {
 		if muc, ok := MUCs[roomName]; ok {
 			for i, member := range muc.Members {
-				if member.AccountId == client.AccountId {
+				if member.AccountId == removedClient.AccountId {
 					muc.Members = append(muc.Members[:i], muc.Members[i+1:]...)
 					break
 				}
@@ -70,15 +74,19 @@ func RemoveClient(ws *websocket.Conn, joinedMUCs []string) {
 	}
 
 	if partyId != "" {
-		for _, c := range Clients {
-			if c.AccountId == client.AccountId {
+		ClientsMux.Lock()
+		snapshot := append([]*Client(nil), Clients...)
+		ClientsMux.Unlock()
+
+		for _, c := range snapshot {
+			if c.AccountId == removedClient.AccountId {
 				continue
 			}
 
 			doc := etree.NewDocument()
 			msg := doc.CreateElement("message")
 			msg.CreateAttr("id", strings.ToUpper(MakeID()))
-			msg.CreateAttr("from", client.Jid)
+			msg.CreateAttr("from", removedClient.Jid)
 			msg.CreateAttr("xmlns", "jabber:client")
 			msg.CreateAttr("to", c.Jid)
 
@@ -87,7 +95,7 @@ func RemoveClient(ws *websocket.Conn, joinedMUCs []string) {
 				"type": "com.epicgames.party.memberexited",
 				"payload": map[string]interface{}{
 					"partyId":   partyId,
-					"memberId":  client.AccountId,
+					"memberId":  removedClient.AccountId,
 					"wasKicked": false,
 				},
 				"timestamp": time.Now().UTC().Format(time.RFC3339),
@@ -95,11 +103,11 @@ func RemoveClient(ws *websocket.Conn, joinedMUCs []string) {
 			body.SetText(mustJSON(payload))
 
 			xmlStr, _ := doc.WriteToString()
-			c.Conn.WriteMessage(websocket.TextMessage, []byte(xmlStr))
+			_ = c.Conn.WriteMessage(websocket.TextMessage, []byte(xmlStr))
 		}
 	}
 
-	utils.XMPP.Logf("Client %s logged out\n", client.DisplayName)
+	utils.XMPP.Logf("Client %s logged out", removedClient.DisplayName)
 }
 
 func updatePresenceForFriends(ws *websocket.Conn, body string, away bool, offline bool) {

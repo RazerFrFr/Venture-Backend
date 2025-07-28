@@ -11,8 +11,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-var perms = false
-
 type BanCommand struct{}
 
 func (BanCommand) Data() *discordgo.ApplicationCommand {
@@ -21,9 +19,9 @@ func (BanCommand) Data() *discordgo.ApplicationCommand {
 		Description: "Bans a user from the game (admin only so go kys fag).",
 		Options: []*discordgo.ApplicationCommandOption{
 			{
-				Type:        discordgo.ApplicationCommandOptionUser,
-				Name:        "user",
-				Description: "Target user.",
+				Type:        discordgo.ApplicationCommandOptionString,
+				Name:        "username",
+				Description: "Target username.",
 				Required:    true,
 			},
 		},
@@ -37,16 +35,16 @@ func (BanCommand) Execute(s *discordgo.Session, i *discordgo.InteractionCreate) 
 		Data: &discordgo.InteractionResponseData{Flags: discordgo.MessageFlagsEphemeral},
 	})
 
-	userOption := i.ApplicationCommandData().Options[0].UserValue(s)
-	if userOption == nil {
+	username := i.ApplicationCommandData().Options[0].StringValue()
+	if username == "" {
 		s.FollowupMessageCreate(i.Interaction, true, &discordgo.WebhookParams{
-			Content: "Invalid user.",
+			Content: "Invalid username.",
 			Flags:   discordgo.MessageFlagsEphemeral,
 		})
 		return
 	}
 
-	targetUser, err := utils.FindUserByDiscordId(userOption.ID)
+	targetUser, err := utils.FindUserByUsername(username)
 	if err != nil || targetUser == nil {
 		s.FollowupMessageCreate(i.Interaction, true, &discordgo.WebhookParams{
 			Content: "User not found.",

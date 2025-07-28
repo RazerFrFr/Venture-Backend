@@ -58,7 +58,14 @@ func InitXMPP() {
 		port = "5000"
 	}
 
-	r := gin.Default()
+	// Debug Mode
+	//r := gin.Default()
+
+	// Release mode
+	gin.SetMode(gin.ReleaseMode)
+
+	r := gin.New()
+	r.Use(gin.Recovery())
 
 	r.GET("/", func(c *gin.Context) {
 		ClientsMux.Lock()
@@ -115,18 +122,18 @@ func xmppHandler(w http.ResponseWriter, r *http.Request) {
 
 	var joinedMUCs []string
 	var accountId, displayName, token, jid, resource, ID string
-	var Authenticated, clientExists, connectionClosed bool
+	var Authenticated, clientExists bool
 
 	ws.SetCloseHandler(func(code int, text string) error {
-		connectionClosed = true
-		clientExists = false
 		RemoveClient(ws, joinedMUCs)
+		clientExists = false
 		return nil
 	})
 
 	for {
 		_, message, err := ws.ReadMessage()
 		if err != nil {
+			RemoveClient(ws, joinedMUCs)
 			break
 		}
 
@@ -155,26 +162,24 @@ func xmppHandler(w http.ResponseWriter, r *http.Request) {
 			handlePresence(ws, parsed.Doc, accountId, displayName, jid, resource, &joinedMUCs, clientExists)
 		}
 
-		if !clientExists && !connectionClosed {
-			if accountId != "" && displayName != "" && token != "" && jid != "" && ID != "" && resource != "" && Authenticated {
-				ClientsMux.Lock()
-				Clients = append(Clients, &Client{
-					Conn:        ws,
-					AccountId:   accountId,
-					DisplayName: displayName,
-					Token:       token,
-					Jid:         jid,
-					Resource:    resource,
-					LastPresence: struct {
-						Away   bool
-						Status string
-					}{Away: false, Status: "{}"},
-				})
-				ClientsMux.Unlock()
+		if !clientExists && accountId != "" && displayName != "" && token != "" && jid != "" && ID != "" && resource != "" && Authenticated {
+			ClientsMux.Lock()
+			Clients = append(Clients, &Client{
+				Conn:        ws,
+				AccountId:   accountId,
+				DisplayName: displayName,
+				Token:       token,
+				Jid:         jid,
+				Resource:    resource,
+				LastPresence: struct {
+					Away   bool
+					Status string
+				}{Away: false, Status: "{}"},
+			})
+			ClientsMux.Unlock()
 
-				utils.XMPP.Logf("New client %s connected", displayName)
-				clientExists = true
-			}
+			utils.XMPP.Logf("New client %s connected", displayName)
+			clientExists = true
 		}
 	}
 }
